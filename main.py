@@ -5,6 +5,13 @@ import warnings
 from distutils.version import LooseVersion
 import project_tests as tests
 
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # or any {'0', '1', '2'}
+
+
+
+DEBUG = False
+
 
 # Check TensorFlow Version
 assert LooseVersion(tf.__version__) >= LooseVersion('1.0'), 'Please use TensorFlow version 1.0 or newer.  You are using {}'.format(tf.__version__)
@@ -26,14 +33,42 @@ def load_vgg(sess, vgg_path):
     """
     # TODO: Implement function
     #   Use tf.saved_model.loader.load to load the model and weights
+
+
     vgg_tag = 'vgg16'
-    vgg_input_tensor_name = 'image_input:0'
-    vgg_keep_prob_tensor_name = 'keep_prob:0'
-    vgg_layer3_out_tensor_name = 'layer3_out:0'
-    vgg_layer4_out_tensor_name = 'layer4_out:0'
-    vgg_layer7_out_tensor_name = 'layer7_out:0'
+    model = tf.saved_model.loader.load(sess, [vgg_tag], vgg_path)
     
-    return None, None, None, None, None
+
+    with tf.name_scope(vgg_tag):
+	    graph = tf.get_default_graph()
+
+
+	    vgg_input_tensor_name = 'image_input:0'    
+	    vgg_keep_prob_tensor_name = 'keep_prob:0'
+	    vgg_layer3_out_tensor_name = 'layer3_out:0'
+	    vgg_layer4_out_tensor_name = 'layer4_out:0'
+	    vgg_layer7_out_tensor_name = 'layer7_out:0'
+
+
+
+	    input_tensor = graph.get_tensor_by_name(vgg_input_tensor_name)
+	    keep_prob = graph.get_tensor_by_name(vgg_keep_prob_tensor_name)
+	    layer3 = graph.get_tensor_by_name(vgg_layer3_out_tensor_name)
+	    layer4 = graph.get_tensor_by_name(vgg_layer4_out_tensor_name)
+	    layer7 = graph.get_tensor_by_name(vgg_layer7_out_tensor_name)
+
+
+	    if DEBUG:
+		    print("***********************************************************")
+		    print(input_tensor)
+		    print(keep_prob)
+		    print(layer3)
+		    print(layer4)
+		    print(layer7)
+		    print("***********************************************************")
+
+    return input_tensor, keep_prob, layer3, layer4, layer7
+
 tests.test_load_vgg(load_vgg, tf)
 
 
