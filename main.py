@@ -202,7 +202,7 @@ def run():
 
     #HYPERPARAMETERS
     epochs = 10
-    batch_size = 32
+    batch_size = 16
     
 
     
