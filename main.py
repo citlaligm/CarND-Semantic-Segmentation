@@ -140,11 +140,11 @@ def optimize(nn_last_layer, correct_label, learning_rate, num_classes):
     cross_entropy_loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=correct_label))
     optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cross_entropy_loss)
 
-    correct_prediction = tf.equal(tf.argmax(logits,1), tf.argmax(correct_label,1))
+ #    correct_prediction = tf.equal(tf.argmax(logits,1), tf.argmax(correct_label,1))
  
-	accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+	# # accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-	print("Accuracy: ", accuracy)
+	# # print("Accuracy: ", accuracy)
 
 
 
