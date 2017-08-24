@@ -212,7 +212,7 @@ def run():
         # Create function to get batches
         get_batches_fn = helper.gen_batch_function(os.path.join(data_dir, 'data_road/training'), image_shape)
 
-        get_batches_test = helper.gen_test_output(os.path.join(data_dir, 'data_road/testing'), image_shape)
+        #get_batches_test = helper.gen_test_output(os.path.join(data_dir, 'data_road/testing'), image_shape)
 
         # OPTIONAL: Augment Images for better results
         #  https://datascience.stackexchange.com/questions/5224/how-to-prepare-augment-images-for-neural-network
