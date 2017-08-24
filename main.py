@@ -149,6 +149,7 @@ def optimize(nn_last_layer, correct_label, learning_rate, num_classes):
 
 
 
+
     return (logits, optimizer, cross_entropy_loss)
 tests.test_optimize(optimize)
 
@@ -239,4 +240,5 @@ def run():
 
 
 if __name__ == '__main__':
+    print("Running...")
     run()
