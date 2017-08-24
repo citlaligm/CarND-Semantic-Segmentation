@@ -140,14 +140,6 @@ def optimize(nn_last_layer, correct_label, learning_rate, num_classes):
     cross_entropy_loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=correct_label))
     optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cross_entropy_loss)
 
- #    correct_prediction = tf.equal(tf.argmax(logits,1), tf.argmax(correct_label,1))
- 
-	# # accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-
-	# # print("Accuracy: ", accuracy)
-
-
-
 
 
     return (logits, optimizer, cross_entropy_loss)
@@ -226,13 +218,6 @@ def run():
         logits, train_op, cross_entropy_loss = optimize(nn_last_layer, correct_label, learning_rate, num_classes)
         train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss, input_image, correct_label, keep_prob, learning_rate)
 
-
-        
-		#print("Test accuracy %g"%accuracy.eval(feed_dict={x: X_test, y_: y_test, keep_prob: 1.0}))
-
-        # TODO: Train NN using the train_nn function
-
-        # TODO: Save inference data using helper.save_inference_samples
         #  helper.save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_prob, input_image)
 
         helper.save_inference_samples(runs_dir, data_dir,sess, image_shape, logits, keep_prob, input_image)
